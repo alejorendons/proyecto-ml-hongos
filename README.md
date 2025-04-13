@@ -1,6 +1,6 @@
 # Mushroom-AI-Classificator
 
-**Proyecto de la materia Introducción a la Inteligencia Artificial de la Universidad UdeA**, en el cual se busca generar un modelo de clasificación de hongos venenosos y no venenosos, utilizando un enfoque de análisis de datos y modelado predictivo. El proyecto incluye la preparación y limpieza de los datos, el entrenamiento de un modelo, y su posterior despliegue en un contenedor Docker con una API REST para su interacción.
+**Proyecto de la materia Modelos 1 de la Universidad UdeA**, en el cual se busca generar un modelo de clasificación de hongos venenosos y no venenosos, utilizando un enfoque de análisis de datos y modelado predictivo. El proyecto incluye la preparación y limpieza de los datos, el entrenamiento de un modelo, y su posterior despliegue en un contenedor Docker con una API REST para su interacción.
 
 ## Miembros del equipo
 
