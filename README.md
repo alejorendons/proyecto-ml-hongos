@@ -21,4 +21,4 @@ El modelo base utilizado en este proyecto es el [Mushroom Classification Analysi
    Para clonar el repositorio, utiliza el siguiente comando:
 
    ```bash
-   git clone https://github.com/tu_usuario/proyecto-ml-hongos.git
+   git clone https://github.com/alejorendons/proyecto-ml-hongos.git
