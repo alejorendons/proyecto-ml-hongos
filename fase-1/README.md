@@ -1,32 +1,43 @@
-# Fase 1: Limpieza y Exploración de Datos
+# Proyecto ML: Clasificación de Hongos (Venenosos/No Venenosos)
 
-En esta fase, se realiza la limpieza de los datos y la exploración inicial para entender su estructura, identificar posibles problemas de calidad y preparar los datos para el modelado.
+## Fase 1: Limpieza y Exploración de Datos
 
-## Descripción
+### Descripción
+En esta fase se realiza la limpieza de datos y exploración inicial para entender su estructura, identificar problemas de calidad y preparar los datos para el modelado, siguiendo estos pasos:
 
-En esta fase se utilizaron los siguientes pasos:
+1. **Carga de los datos**  
+   - Archivos `train.csv` y `test.csv` del concurso Kaggle  
+   - 22 características morfológicas de hongos  
 
-1. **Carga de los datos**
-   
-   Se cargaron los archivos `train.csv` y `test.csv` proporcionados, los cuales contienen características de diferentes tipos de hongos. Estos datos fueron extraídos del concurso de Kaggle.
+2. **Exploración de los datos**  
+   - Detección de valores faltantes/inconsistencias  
+   - Análisis de distribuciones y relaciones entre variables  
+   - Visualización de correlaciones  
 
-2. **Exploración de los datos**
+3. **Limpieza de los datos**  
+   - Imputación de valores faltantes  
+   - Transformación de variables categóricas (OneHotEncoder)  
+   - Normalización de características  
+   - Eliminación de outliers con Isolation Forest  
 
-   Se exploraron los datos para detectar cualquier valor faltante, inconsistencias o valores atípicos que pudieran afectar el rendimiento del modelo. También se realizaron análisis descriptivos para entender las distribuciones y las relaciones entre las variables.
+4. **Entrenamiento del modelo**  
+   - Modelo XGBoost con optimización de hiperparámetros  
+   - Clasificación binaria (venenoso/no venenoso)  
+   - Mejor score MCC: 0.9847  
 
-3. **Limpieza de los datos**
+### Resultados Generados
+- Modelo entrenado: `artifacts/model_package.joblib`  
+- Predicciones: `fase-1/submission.csv`  
 
-   Se eliminaron o imputaron los valores faltantes, se transformaron las variables categóricas en variables numéricas utilizando codificación (OneHotEncoder), y se normalizaron las características para mejorar la eficiencia del modelo.
+---
 
-4. **Entrenamiento del modelo**
+## Instrucciones de Ejecución
 
-   Usamos un modelo de clasificación basado en un enfoque de clasificación binaria para predecir si un hongo es venenoso o no.
-
-## Instrucciones para ejecutar la fase 1
-
-1. **Clonar el repositorio**
-
-   Clona el repositorio del proyecto:
-
+### Requisitos previos
+1. **Git LFS** (para manejo de archivos grandes):
    ```bash
-   git clone https://github.com/alejorendons/proyecto-ml-hongos.git
+   # Windows: Descargar de https://git-lfs.com
+   # MacOS: brew install git-lfs
+   # Linux: sudo apt-get install git-lfs
+2. Ejecutar el notebook Jupyter ps4e8-data-cleaning-and-eda-of-mushrooms.ipynb
+3. Ejecutar todas las celdas del notebook en orden
