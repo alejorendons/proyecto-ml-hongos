@@ -29,4 +29,4 @@ En esta fase se utilizaron los siguientes pasos:
    Clona el repositorio del proyecto:
 
    ```bash
-   git clone https://github.com/tu_usuario/proyecto-ml-hongos.git
+   git clone https://github.com/alejorendons/proyecto-ml-hongos.git
