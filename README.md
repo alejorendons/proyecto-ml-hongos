@@ -22,3 +22,6 @@ El modelo base utilizado en este proyecto es el [Mushroom Classification Analysi
 
    ```bash
    git clone https://github.com/alejorendons/proyecto-ml-hongos.git
+
+2. Instalar las dependencias necesarias usando el archivo requirements.txt con el comando pip install -r requirements.txt
+3. Dentro de cada carpeta de las fases, se encuentra un archivo Readme.md con las instrucciones para ejecutar cada fase.
