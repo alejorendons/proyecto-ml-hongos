@@ -14,7 +14,6 @@ Sigue estos pasos después de clonar el repositorio:
 
 ### 1. Clonar el repositorio
 
-
 Esto producirá:
 ```bash
 git clone https://github.com/alejorendons/proyecto-ml-hongos.git
@@ -22,12 +21,12 @@ cd fase-2
 ```
 
 ### 2. Construir la imagen de Docker
-Esto crea un entorno aislado con todas las dependencias instaladas:
+Esto crea un entorno aislado con todas las dependencias instaladas, dentro de la carpeta fase-2 abrel terminal y ejecuta el siguiente comando:
 ```bash
 docker build -t mushroom-model .
 ```
 ### 3. Ejecutar el contenedor Docker con los volúmenes montados
-Esto monta tus carpetas locales data/ y artifacts/ dentro del contenedor:
+Esto monta tus carpetas locales data/ y artifacts/ dentro del contenedor, luego ejecuta:
 ```bash
 docker run -it --rm -v "${PWD}/data:/app/data" -v "${PWD}/artifacts:/app/artifacts" --name mushroom-container mushroom-model
 ```
@@ -37,7 +36,7 @@ Dentro del contenedor, ejecuta:
 python train.py
 ```
 ### 5. Realizar predicciones
-Después del entrenamiento, puedes predecir con un archivo de prueba (ejemplo: data/test.csv):
+Después del entrenamiento, puedes predecir con un archivo de prueba (ejemplo: data/test.csv) con el siguiente comando:
 ```bash
 python predict.py data/test.csv
 ```
@@ -47,6 +46,7 @@ Modelo entrenado: artifacts/model_package.joblib
 Predicciones: predictions.csv (en el directorio raíz)
 
 ### 6. Salir del contenedor
+Para finalizar escribe el siguiente comando:
 ```bash
 Exit
 ```
