@@ -29,11 +29,15 @@ Antes de iniciar la API, es **crucial** generar el archivo del modelo. Este coma
 docker run --rm -v "${PWD}/data:/app/data" -v "${PWD}/artifacts:/app/artifacts" mushroom-api python train.py
 ```
 
-### 3. Iniciar el Servidor de la API
+### 3. Reiniciar y Ejecutar el Servidor de la API
 
-Con el modelo ya creado, este comando inicia el servidor en segundo plano (`-d`). Los volúmenes (`-v`) son importantes para que el contenedor pueda leer el modelo que acabas de entrenar.
-
+Este flujo de trabajo detiene cualquier versión anterior del contenedor y lo inicia de nuevo para asegurar que se carguen todos los cambios.
 ```bash
+# Detener y eliminar el contenedor anterior para evitar conflictos
+docker stop mushroom-api 2>$null
+docker rm mushroom-api 2>$null
+
+# Iniciar el nuevo contenedor con el servidor de la API en segundo plano
 docker run -d --rm -p 5000:8000 --name mushroom-api -v "${PWD}/data:/app/data" -v "${PWD}/artifacts:/app/artifacts" mushroom-api
 ```
 *La API estará disponible en `http://localhost:5000`.*
@@ -55,7 +59,7 @@ python client.py
 Puedes enviar una solicitud de predicción directamente desde la terminal.
 
 ```bash
-curl -X POST -H "Content-Type: application/json" -d "{\"cap-shape\": \"x\", \"cap-surface\": \"s\", \"cap-color\": \"n\", \"bruises\": \"t\", \"odor\": \"p\", \"gill-attachment\": \"f\", \"gill-spacing\": \"c\", \"gill-size\": \"n\", \"gill-color\": \"k\", \"stalk-shape\": \"e\", \"stalk-root\": \"e\", \"stalk-surface-above-ring\": \"s\", \"stalk-surface-below-ring\": \"s\", \"stalk-color-above-ring\": \"w\", \"stalk-color-below-ring\": \"w\", \"veil-type\": \"p\", \"veil-color\": \"w\", \"ring-number\": \"o\", \"ring-type\": \"p\", \"spore-print-color\": \"k\", \"population\": \"s\", \"habitat\": \"u\"}" http://localhost:5000/predict
+curl.exe -X POST -F "file=@data/test.csv" http://localhost:5000/predict
 ```
 
 ### 5. Gestionar el Contenedor
