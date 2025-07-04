@@ -1,23 +1,16 @@
+# Usa una imagen base de Python.
 FROM python:3.11-slim
 
+# Establece el directorio de trabajo.
 WORKDIR /app
 
-# Copiar scripts y dependencias
-COPY api/requirements.txt .
-COPY api/train.py .
-COPY api/predict.py .
-COPY api/apirest.py .
-COPY client.py .
+# Copia todos los archivos y carpetas del proyecto.
+COPY . .
 
-# Instalar dependencias
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
+# Instala las dependencias desde la ruta correcta.
+RUN pip install --no-cache-dir -r api/requirements.txt
 
-# Crear directorios necesarios
-RUN mkdir -p /app/data /app/artifacts
-
-# Puerto expuesto para la API
+# Expone el puerto 5000, que es el que usa tu script apirest.py.
 EXPOSE 5000
 
-# Comando para iniciar la API
-CMD ["python", "apirest.py"]
+CMD ["python", "api/apirest.py"]
