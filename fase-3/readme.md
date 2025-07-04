@@ -23,7 +23,7 @@ Si estás empezando desde cero, clona el repositorio y navega a la carpeta de la
 Esto producirá:
 ```bash
 git clone https://github.com/alejorendons/proyecto-ml-hongos.git
-cd proyecto-ml-hongos/fase-3
+cd fase-3
 ```
 
 ### 2. Construir la Imagen de Docker
