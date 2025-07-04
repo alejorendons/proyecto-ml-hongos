@@ -12,6 +12,13 @@ Este repositorio contiene la fase final del proyecto, donde el modelo de machine
 ## 🚀 Cómo Empezar
 
 Sigue estos pasos para construir, entrenar y ejecutar la API.
+###  Clonar el repositorio
+
+Esto producirá:
+```bash
+git clone https://github.com/alejorendons/proyecto-ml-hongos.git
+cd fase-3
+```
 
 ### 1. Construir la Imagen de Docker
 
