@@ -1,52 +1,47 @@
 # 🍄 Clasificador de Hongos – Fase 3: API REST
-
-Este repositorio contiene la fase final del proyecto, donde el modelo de machine learning se despliega como una API REST interactiva utilizando Flask y Gunicorn, todo dentro de un contenedor Docker.
+Este repositorio contiene la fase final del proyecto, donde el modelo de machine learning se despliega como una API REST interactiva utilizando Flask, todo dentro de un contenedor Docker autosuficiente.
 
 ## 🧾 Requisitos
+Tener Docker Desktop instalado y en ejecución en tu sistema.
 
-* Tener **Docker Desktop** instalado y en ejecución en tu sistema.
-* Una terminal de comandos como PowerShell, CMD o Bash.
-* Tener todos los archivos del proyecto (`Dockerfile`, `apirest.py`, `train.py`, etc.) en la misma carpeta.
-* Una subcarpeta llamada `data` que contenga el archivo `train.csv`.
+Una terminal de comandos como PowerShell, CMD o Bash.
+
+Tener la estructura de carpetas final del proyecto, incluyendo:
+
+La carpeta api con los scripts de Python.
+
+La carpeta artifacts con el archivo model_package.joblib ya entrenado.
+
+La carpeta data con train.csv y test.csv.
 
 ## 🚀 Cómo Empezar
+Sigue estos pasos para construir la imagen y ejecutar la API. El Dockerfile está configurado para copiar todos los archivos necesarios, por lo que el proceso es muy directo.
 
-Sigue estos pasos para construir, entrenar y ejecutar la API.
-###  Clonar el repositorio
+###  1. Clonar el Repositorio (Paso Inicial)
+Si estás empezando desde cero, clona el repositorio y navega a la carpeta de la fase 3.
 
 Esto producirá:
 ```bash
 git clone https://github.com/alejorendons/proyecto-ml-hongos.git
-cd fase-3
+cd proyecto-ml-hongos/fase-3
 ```
 
-### 1. Construir la Imagen de Docker
+### 2. Construir la Imagen de Docker
 
-Este comando empaqueta la aplicación de la API y todas sus dependencias en una imagen reutilizable llamada `mushroom-api`.
+Este comando empaqueta toda la aplicación (código, modelo pre-entrenado y datos) en una imagen autosuficiente llamada mushroom-api.
 
 ```bash
 docker build -t mushroom-api .
 ```
 
-### 2. Entrenar el Modelo
+### 3. Iniciar el Servidor de la API
 
-Antes de iniciar la API, es **crucial** generar el archivo del modelo. Este comando ejecuta el script de entrenamiento, que guardará `model_package.joblib` en una carpeta local llamada `artifacts`.
+Ahora, ejecuta un contenedor a partir de la imagen que acabas de crear. No se necesitan volúmenes (-v) porque todos los archivos ya están dentro de la imagen
 
 ```bash
-docker run --rm -v "${PWD}/data:/app/data" -v "${PWD}/artifacts:/app/artifacts" mushroom-api python train.py
+docker run -d --rm -p 5000:5000 --name mushroom-api mushroom-api
 ```
 
-### 3. Reiniciar y Ejecutar el Servidor de la API
-
-Este flujo de trabajo detiene cualquier versión anterior del contenedor y lo inicia de nuevo para asegurar que se carguen todos los cambios.
-```bash
-# Detener y eliminar el contenedor anterior para evitar conflictos
-docker stop mushroom-api 2>$null
-docker rm mushroom-api 2>$null
-
-# Iniciar el nuevo contenedor con el servidor de la API en segundo plano
-docker run -d --rm -p 5000:8000 --name mushroom-api -v "${PWD}/data:/app/data" -v "${PWD}/artifacts:/app/artifacts" mushroom-api
-```
 *La API estará disponible en `http://localhost:5000`.*
 
 ### 4. Probar los Endpoints
@@ -60,13 +55,11 @@ El cliente de Python prueba ambos endpoints de forma sencilla.
 ```bash
 python client.py
 ```
-
-#### B. Con `cURL` (Alternativa)
-
-Puedes enviar una solicitud de predicción directamente desde la terminal.
+Salida esperada:
 
 ```bash
-curl.exe -X POST -F "file=@data/test.csv" http://localhost:5000/predict
+Predicción: {'predictions': ['p', 'e', ...]}
+Entrenamiento: {'message': 'Entrenamiento iniciado en segundo plano...'}
 ```
 
 ### 5. Gestionar el Contenedor
